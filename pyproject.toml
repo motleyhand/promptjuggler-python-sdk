@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "promptjuggler"
+version = "0.0.0"
+description = "Python SDK for the PromptJuggler API — run prompts and workflows, manage knowledge bases, and verify webhooks."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "PromptJuggler" }]
+keywords = ["promptjuggler", "llm", "prompts", "ai", "sdk"]
+dependencies = [
+  "pydantic>=2",
+  "urllib3>=2",
+  "python-dateutil>=2.8",
+  "typing-extensions>=4.7",
+]
+
+[project.urls]
+Homepage = "https://docs.promptjuggler.com/sdks/python/overview"
+Repository = "https://github.com/motleyhand/promptjuggler-python-sdk"
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "mypy>=1.13", "ruff>=0.8"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/promptjuggler"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["tests"]
+
+[tool.ruff]
+line-length = 110
+src = ["src", "tests"]
+# The generated client carries its own style; it's verified by the drift-check, not ruff.
+extend-exclude = ["src/promptjuggler/_generated"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+strict = true
+python_version = "3.10"
+# The generated client is third-party-style code; type-check only our facade.
+files = ["src/promptjuggler", "tests"]
+exclude = "src/promptjuggler/_generated"
+
+[[tool.mypy.overrides]]
+module = "promptjuggler._generated.*"
+follow_untyped_imports = true
