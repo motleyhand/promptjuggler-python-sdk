@@ -21,7 +21,9 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from promptjuggler._generated.models.run_cost import RunCost
 from promptjuggler._generated.models.run_status import RunStatus
+from promptjuggler._generated.models.token_usage import TokenUsage
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -36,7 +38,9 @@ class PromptRun(BaseModel):
     finished_at: Optional[datetime] = Field(default=None, description="Timestamp when the run finished. Null while the run is pending.", alias="finishedAt")
     output: Optional[StrictStr] = Field(default=None, description="LLM output text. Null while pending or when the run failed.")
     error: Optional[StrictStr] = Field(default=None, description="Error message if the run failed. Null on success.")
-    __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "output", "error"]
+    token_usage: Optional[TokenUsage] = Field(default=None, description="Token usage for the successful run. Null while pending or when the run failed.", alias="tokenUsage")
+    cost: Optional[RunCost] = Field(default=None, description="Cost breakdown for the run. Null while pending.")
+    __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "output", "error", "tokenUsage", "cost"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -77,6 +81,12 @@ class PromptRun(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of token_usage
+        if self.token_usage:
+            _dict['tokenUsage'] = self.token_usage.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cost
+        if self.cost:
+            _dict['cost'] = self.cost.to_dict()
         # set to None if finished_at (nullable) is None
         # and model_fields_set contains the field
         if self.finished_at is None and "finished_at" in self.model_fields_set:
@@ -91,6 +101,16 @@ class PromptRun(BaseModel):
         # and model_fields_set contains the field
         if self.error is None and "error" in self.model_fields_set:
             _dict['error'] = None
+
+        # set to None if token_usage (nullable) is None
+        # and model_fields_set contains the field
+        if self.token_usage is None and "token_usage" in self.model_fields_set:
+            _dict['tokenUsage'] = None
+
+        # set to None if cost (nullable) is None
+        # and model_fields_set contains the field
+        if self.cost is None and "cost" in self.model_fields_set:
+            _dict['cost'] = None
 
         return _dict
 
@@ -109,7 +129,9 @@ class PromptRun(BaseModel):
             "createdAt": obj.get("createdAt"),
             "finishedAt": obj.get("finishedAt"),
             "output": obj.get("output"),
-            "error": obj.get("error")
+            "error": obj.get("error"),
+            "tokenUsage": TokenUsage.from_dict(obj["tokenUsage"]) if obj.get("tokenUsage") is not None else None,
+            "cost": RunCost.from_dict(obj["cost"]) if obj.get("cost") is not None else None
         })
         return _obj
 

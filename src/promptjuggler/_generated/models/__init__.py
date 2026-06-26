@@ -35,6 +35,7 @@ from promptjuggler._generated.models.knowledge_search import KnowledgeSearch
 from promptjuggler._generated.models.mcp import Mcp
 from promptjuggler._generated.models.memory import Memory
 from promptjuggler._generated.models.model import Model
+from promptjuggler._generated.models.model_cost import ModelCost
 from promptjuggler._generated.models.model_params import ModelParams
 from promptjuggler._generated.models.prompt_call import PromptCall
 from promptjuggler._generated.models.prompt_revision import PromptRevision
@@ -43,10 +44,12 @@ from promptjuggler._generated.models.prompt_run_finished import PromptRunFinishe
 from promptjuggler._generated.models.provider import Provider
 from promptjuggler._generated.models.response_format import ResponseFormat
 from promptjuggler._generated.models.role import Role
+from promptjuggler._generated.models.run_cost import RunCost
 from promptjuggler._generated.models.run_status import RunStatus
 from promptjuggler._generated.models.script_call import ScriptCall
 from promptjuggler._generated.models.service_tier import ServiceTier
 from promptjuggler._generated.models.text_format import TextFormat
+from promptjuggler._generated.models.token_usage import TokenUsage
 from promptjuggler._generated.models.tool import Tool
 from promptjuggler._generated.models.version_ref import VersionRef
 from promptjuggler._generated.models.version_ref_id_or_tag import VersionRefIdOrTag

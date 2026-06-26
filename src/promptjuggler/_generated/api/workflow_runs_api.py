@@ -375,7 +375,7 @@ class WorkflowRunsApi:
     ) -> WorkflowRun:
         """Get a workflow run by ID
 
-        Retrieves the current state of a workflow run, including status, outputs, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
+        Retrieves the current state of a workflow run, including status, outputs, aggregated token usage, cost, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
 
         :param id: Workflow run ID (required)
         :type id: UUID
@@ -445,7 +445,7 @@ class WorkflowRunsApi:
     ) -> ApiResponse[WorkflowRun]:
         """Get a workflow run by ID
 
-        Retrieves the current state of a workflow run, including status, outputs, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
+        Retrieves the current state of a workflow run, including status, outputs, aggregated token usage, cost, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
 
         :param id: Workflow run ID (required)
         :type id: UUID
@@ -515,7 +515,7 @@ class WorkflowRunsApi:
     ) -> RESTResponseType:
         """Get a workflow run by ID
 
-        Retrieves the current state of a workflow run, including status, outputs, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
+        Retrieves the current state of a workflow run, including status, outputs, aggregated token usage, cost, and errors. Poll this endpoint after receiving a webhook notification, or use it to check the status of a run in progress.
 
         :param id: Workflow run ID (required)
         :type id: UUID

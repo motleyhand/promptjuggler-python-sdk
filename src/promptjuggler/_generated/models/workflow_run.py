@@ -21,7 +21,9 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from promptjuggler._generated.models.run_cost import RunCost
 from promptjuggler._generated.models.run_status import RunStatus
+from promptjuggler._generated.models.token_usage import TokenUsage
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -36,7 +38,9 @@ class WorkflowRun(BaseModel):
     finished_at: Optional[datetime] = Field(default=None, description="Timestamp when the run finished. Null while the run is pending.", alias="finishedAt")
     outputs: Dict[str, Optional[StrictStr]] = Field(description="Map of output node names to their values. Empty object while pending.")
     errors: List[StrictStr] = Field(description="List of error messages from failed nodes. Empty array on success.")
-    __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "outputs", "errors"]
+    token_usage: Optional[TokenUsage] = Field(default=None, description="Aggregated token usage across the workflow run. Null while pending.", alias="tokenUsage")
+    cost: Optional[RunCost] = Field(default=None, description="Aggregated cost breakdown across the workflow run. Null while pending.")
+    __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "outputs", "errors", "tokenUsage", "cost"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -77,10 +81,26 @@ class WorkflowRun(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of token_usage
+        if self.token_usage:
+            _dict['tokenUsage'] = self.token_usage.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of cost
+        if self.cost:
+            _dict['cost'] = self.cost.to_dict()
         # set to None if finished_at (nullable) is None
         # and model_fields_set contains the field
         if self.finished_at is None and "finished_at" in self.model_fields_set:
             _dict['finishedAt'] = None
+
+        # set to None if token_usage (nullable) is None
+        # and model_fields_set contains the field
+        if self.token_usage is None and "token_usage" in self.model_fields_set:
+            _dict['tokenUsage'] = None
+
+        # set to None if cost (nullable) is None
+        # and model_fields_set contains the field
+        if self.cost is None and "cost" in self.model_fields_set:
+            _dict['cost'] = None
 
         return _dict
 
@@ -99,7 +119,9 @@ class WorkflowRun(BaseModel):
             "createdAt": obj.get("createdAt"),
             "finishedAt": obj.get("finishedAt"),
             "outputs": obj.get("outputs"),
-            "errors": obj.get("errors")
+            "errors": obj.get("errors"),
+            "tokenUsage": TokenUsage.from_dict(obj["tokenUsage"]) if obj.get("tokenUsage") is not None else None,
+            "cost": RunCost.from_dict(obj["cost"]) if obj.get("cost") is not None else None
         })
         return _obj
 

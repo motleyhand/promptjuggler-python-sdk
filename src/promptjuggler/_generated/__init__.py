@@ -53,6 +53,7 @@ __all__ = [
     "Mcp",
     "Memory",
     "Model",
+    "ModelCost",
     "ModelParams",
     "PromptCall",
     "PromptRevision",
@@ -61,10 +62,12 @@ __all__ = [
     "Provider",
     "ResponseFormat",
     "Role",
+    "RunCost",
     "RunStatus",
     "ScriptCall",
     "ServiceTier",
     "TextFormat",
+    "TokenUsage",
     "Tool",
     "VersionRef",
     "VersionRefIdOrTag",
@@ -114,6 +117,7 @@ from promptjuggler._generated.models.knowledge_search import KnowledgeSearch as 
 from promptjuggler._generated.models.mcp import Mcp as Mcp
 from promptjuggler._generated.models.memory import Memory as Memory
 from promptjuggler._generated.models.model import Model as Model
+from promptjuggler._generated.models.model_cost import ModelCost as ModelCost
 from promptjuggler._generated.models.model_params import ModelParams as ModelParams
 from promptjuggler._generated.models.prompt_call import PromptCall as PromptCall
 from promptjuggler._generated.models.prompt_revision import PromptRevision as PromptRevision
@@ -122,10 +126,12 @@ from promptjuggler._generated.models.prompt_run_finished import PromptRunFinishe
 from promptjuggler._generated.models.provider import Provider as Provider
 from promptjuggler._generated.models.response_format import ResponseFormat as ResponseFormat
 from promptjuggler._generated.models.role import Role as Role
+from promptjuggler._generated.models.run_cost import RunCost as RunCost
 from promptjuggler._generated.models.run_status import RunStatus as RunStatus
 from promptjuggler._generated.models.script_call import ScriptCall as ScriptCall
 from promptjuggler._generated.models.service_tier import ServiceTier as ServiceTier
 from promptjuggler._generated.models.text_format import TextFormat as TextFormat
+from promptjuggler._generated.models.token_usage import TokenUsage as TokenUsage
 from promptjuggler._generated.models.tool import Tool as Tool
 from promptjuggler._generated.models.version_ref import VersionRef as VersionRef
 from promptjuggler._generated.models.version_ref_id_or_tag import VersionRefIdOrTag as VersionRefIdOrTag
