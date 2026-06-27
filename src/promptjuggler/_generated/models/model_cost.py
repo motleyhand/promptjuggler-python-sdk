@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
@@ -28,9 +28,9 @@ class ModelCost(BaseModel):
     ModelCost
     """ # noqa: E501
     input: Union[StrictFloat, StrictInt]
-    cached_input: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="cachedInput")
+    cached_input: Union[StrictFloat, StrictInt] = Field(alias="cachedInput")
     output: Union[StrictFloat, StrictInt]
-    web_search: Optional[Union[StrictFloat, StrictInt]] = Field(default=0, alias="webSearch")
+    web_search: Union[StrictFloat, StrictInt] = Field(alias="webSearch")
     total: Union[StrictFloat, StrictInt]
     __properties: ClassVar[List[str]] = ["input", "cachedInput", "output", "webSearch", "total"]
 
@@ -73,11 +73,6 @@ class ModelCost(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if cached_input (nullable) is None
-        # and model_fields_set contains the field
-        if self.cached_input is None and "cached_input" in self.model_fields_set:
-            _dict['cachedInput'] = None
-
         return _dict
 
     @classmethod
@@ -93,7 +88,7 @@ class ModelCost(BaseModel):
             "input": obj.get("input"),
             "cachedInput": obj.get("cachedInput"),
             "output": obj.get("output"),
-            "webSearch": obj.get("webSearch") if obj.get("webSearch") is not None else 0,
+            "webSearch": obj.get("webSearch"),
             "total": obj.get("total")
         })
         return _obj
