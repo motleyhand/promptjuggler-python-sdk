@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "promptjuggler"
-version = "0.0.0"
+version = "1.0.4"
 description = "Python SDK for the PromptJuggler API — run prompts and workflows, manage knowledge bases, and verify webhooks."
 readme = "README.md"
 license = "MIT"
