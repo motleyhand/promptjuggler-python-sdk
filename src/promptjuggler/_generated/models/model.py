@@ -26,6 +26,9 @@ class Model(str, Enum):
     """
     allowed enum values
     """
+    GPT_MINUS_5_DOT_6_MINUS_SOL = 'gpt-5.6-sol'
+    GPT_MINUS_5_DOT_6_MINUS_TERRA = 'gpt-5.6-terra'
+    GPT_MINUS_5_DOT_6_MINUS_LUNA = 'gpt-5.6-luna'
     GPT_MINUS_5_DOT_5 = 'gpt-5.5'
     GPT_MINUS_5_DOT_5_MINUS_PRO = 'gpt-5.5-pro'
     GPT_MINUS_5_DOT_4 = 'gpt-5.4'
