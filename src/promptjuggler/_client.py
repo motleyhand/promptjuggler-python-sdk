@@ -10,6 +10,7 @@ import urllib3.exceptions
 from promptjuggler._generated.api.knowledge_bases_api import KnowledgeBasesApi
 from promptjuggler._generated.api.prompt_runs_api import PromptRunsApi
 from promptjuggler._generated.api.prompts_api import PromptsApi
+from promptjuggler._generated.api.streaming_api import StreamingApi
 from promptjuggler._generated.api.workflow_runs_api import WorkflowRunsApi
 from promptjuggler._generated.api_client import ApiClient
 from promptjuggler._generated.configuration import Configuration
@@ -23,6 +24,7 @@ from promptjuggler._generated.models.knowledge_base_response import KnowledgeBas
 from promptjuggler._generated.models.knowledge_document_response import KnowledgeDocumentResponse
 from promptjuggler._generated.models.prompt_revision import PromptRevision
 from promptjuggler._generated.models.prompt_run import PromptRun
+from promptjuggler._generated.models.stream_token_response import StreamTokenResponse
 from promptjuggler._generated.models.workflow_run import WorkflowRun
 from promptjuggler.errors import ApiError, NetworkError
 
@@ -48,6 +50,7 @@ class PromptJuggler:
         self._prompt_runs = PromptRunsApi(client)
         self._workflow_runs = WorkflowRunsApi(client)
         self._knowledge_bases = KnowledgeBasesApi(client)
+        self._streaming = StreamingApi(client)
 
     def get_prompt(self, slug: str, version: int | str) -> PromptRevision:
         """Fetch a prompt revision by slug and version (a revision number or a tag like ``production``)."""
@@ -108,6 +111,17 @@ class PromptJuggler:
     def get_workflow_run(self, run_id: str | UUID) -> WorkflowRun:
         """Fetch a workflow run by ID."""
         return self._send(lambda: self._workflow_runs.get_workflow_run(_uuid(run_id)))
+
+    def create_stream_token(self, thread: str | UUID) -> StreamTokenResponse:
+        """Mint a short-lived, thread-scoped credential for the streaming endpoint.
+
+        Call this from your server and hand the result to the browser — the API key must never
+        reach it. The response carries the fully-resolved SSE ``url`` alongside the token, so
+        clients need no host configuration.
+
+        Connect before triggering a run: tokens emitted while nobody is subscribed are not replayed.
+        """
+        return self._send(lambda: self._streaming.create_stream_token(_uuid(thread)))
 
     def get_knowledge_base(self, slug: str) -> KnowledgeBaseResponse:
         """Fetch a knowledge base by slug."""

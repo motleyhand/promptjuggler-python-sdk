@@ -8,6 +8,7 @@ from promptjuggler._generated.models.knowledge_document_response import Knowledg
 from promptjuggler._generated.models.prompt_revision import PromptRevision
 from promptjuggler._generated.models.prompt_run import PromptRun
 from promptjuggler._generated.models.run_status import RunStatus
+from promptjuggler._generated.models.stream_token_response import StreamTokenResponse
 from promptjuggler._generated.models.workflow_run import WorkflowRun
 from promptjuggler.errors import ApiError, NetworkError, PromptJugglerError
 from promptjuggler.webhook import verify_webhook_signature
@@ -25,5 +26,6 @@ __all__ = [
     "PromptRevision",
     "PromptRun",
     "RunStatus",
+    "StreamTokenResponse",
     "WorkflowRun",
 ]
