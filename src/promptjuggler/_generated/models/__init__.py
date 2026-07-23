@@ -48,6 +48,7 @@ from promptjuggler._generated.models.run_cost import RunCost
 from promptjuggler._generated.models.run_status import RunStatus
 from promptjuggler._generated.models.script_call import ScriptCall
 from promptjuggler._generated.models.service_tier import ServiceTier
+from promptjuggler._generated.models.stream_token_response import StreamTokenResponse
 from promptjuggler._generated.models.text_format import TextFormat
 from promptjuggler._generated.models.token_usage import TokenUsage
 from promptjuggler._generated.models.tool import Tool
