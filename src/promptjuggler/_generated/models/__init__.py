@@ -19,6 +19,8 @@ from promptjuggler._generated.models.create_prompt_run_response import CreatePro
 from promptjuggler._generated.models.create_workflow_run import CreateWorkflowRun
 from promptjuggler._generated.models.create_workflow_run_metadata_value import CreateWorkflowRunMetadataValue
 from promptjuggler._generated.models.create_workflow_run_response import CreateWorkflowRunResponse
+from promptjuggler._generated.models.emit import Emit
+from promptjuggler._generated.models.emitted_item import EmittedItem
 from promptjuggler._generated.models.error_response import ErrorResponse
 from promptjuggler._generated.models.http_call import HttpCall
 from promptjuggler._generated.models.http_header import HttpHeader

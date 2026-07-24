@@ -17,6 +17,7 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from promptjuggler._generated.models.emit import Emit
 from promptjuggler._generated.models.http_call import HttpCall
 from promptjuggler._generated.models.knowledge_search import KnowledgeSearch
 from promptjuggler._generated.models.mcp import Mcp
@@ -28,7 +29,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-TOOL_ONE_OF_SCHEMAS = ["HttpCall", "KnowledgeSearch", "Mcp", "PromptCall", "ScriptCall", "WebSearch", "WorkflowCall"]
+TOOL_ONE_OF_SCHEMAS = ["Emit", "HttpCall", "KnowledgeSearch", "Mcp", "PromptCall", "ScriptCall", "WebSearch", "WorkflowCall"]
 
 class Tool(BaseModel):
     """
@@ -48,8 +49,10 @@ class Tool(BaseModel):
     oneof_schema_6_validator: Optional[WorkflowCall] = None
     # data type: KnowledgeSearch
     oneof_schema_7_validator: Optional[KnowledgeSearch] = None
-    actual_instance: Optional[Union[HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall]] = None
-    one_of_schemas: Set[str] = { "HttpCall", "KnowledgeSearch", "Mcp", "PromptCall", "ScriptCall", "WebSearch", "WorkflowCall" }
+    # data type: Emit
+    oneof_schema_8_validator: Optional[Emit] = None
+    actual_instance: Optional[Union[Emit, HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall]] = None
+    one_of_schemas: Set[str] = { "Emit", "HttpCall", "KnowledgeSearch", "Mcp", "PromptCall", "ScriptCall", "WebSearch", "WorkflowCall" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -110,12 +113,17 @@ class Tool(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `KnowledgeSearch`")
         else:
             match += 1
+        # validate data type: Emit
+        if not isinstance(v, Emit):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `Emit`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in Tool with oneOf schemas: HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in Tool with oneOf schemas: Emit, HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in Tool with oneOf schemas: HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in Tool with oneOf schemas: Emit, HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -172,13 +180,19 @@ class Tool(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into Emit
+        try:
+            instance.actual_instance = Emit.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into Tool with oneOf schemas: HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into Tool with oneOf schemas: Emit, HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into Tool with oneOf schemas: HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into Tool with oneOf schemas: Emit, HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -192,7 +206,7 @@ class Tool(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], Emit, HttpCall, KnowledgeSearch, Mcp, PromptCall, ScriptCall, WebSearch, WorkflowCall]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

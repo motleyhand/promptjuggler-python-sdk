@@ -41,7 +41,13 @@ def test_run_prompt_serializes_options_and_array_metadata() -> None:
 
 
 def test_get_prompt_run_gets_by_id() -> None:
-    run = {"id": RUN_ID, "status": "completed", "createdAt": "2026-01-01T00:00:00Z", "output": "Hi Ada"}
+    run = {
+        "id": RUN_ID,
+        "status": "completed",
+        "createdAt": "2026-01-01T00:00:00Z",
+        "output": "Hi Ada",
+        "emitted": [],
+    }
     with mock_transport(run) as calls:
         client().get_prompt_run(RUN_ID)
 

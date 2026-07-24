@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
+from promptjuggler._generated.models.emitted_item import EmittedItem
 from promptjuggler._generated.models.run_cost import RunCost
 from promptjuggler._generated.models.run_status import RunStatus
 from promptjuggler._generated.models.token_usage import TokenUsage
@@ -37,10 +38,11 @@ class PromptRun(BaseModel):
     created_at: datetime = Field(description="Timestamp when the run was created.", alias="createdAt")
     finished_at: Optional[datetime] = Field(default=None, description="Timestamp when the run finished. Null while the run is pending.", alias="finishedAt")
     output: Optional[StrictStr] = Field(default=None, description="LLM output text. Null while pending or when the run failed.")
+    emitted: List[EmittedItem] = Field(description="Payloads produced by emit tools during this run, in call order. Empty until the run completes.")
     error: Optional[StrictStr] = Field(default=None, description="Error message if the run failed. Null on success.")
     token_usage: Optional[TokenUsage] = Field(default=None, description="Token usage for the successful run. Null while pending or when the run failed.", alias="tokenUsage")
     cost: Optional[RunCost] = Field(default=None, description="Cost breakdown for the run. Null while pending.")
-    __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "output", "error", "tokenUsage", "cost"]
+    __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "output", "emitted", "error", "tokenUsage", "cost"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -81,6 +83,13 @@ class PromptRun(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in emitted (list)
+        _items = []
+        if self.emitted:
+            for _item_emitted in self.emitted:
+                if _item_emitted:
+                    _items.append(_item_emitted.to_dict())
+            _dict['emitted'] = _items
         # override the default output from pydantic by calling `to_dict()` of token_usage
         if self.token_usage:
             _dict['tokenUsage'] = self.token_usage.to_dict()
@@ -129,6 +138,7 @@ class PromptRun(BaseModel):
             "createdAt": obj.get("createdAt"),
             "finishedAt": obj.get("finishedAt"),
             "output": obj.get("output"),
+            "emitted": [EmittedItem.from_dict(_item) for _item in obj["emitted"]] if obj.get("emitted") is not None else None,
             "error": obj.get("error"),
             "tokenUsage": TokenUsage.from_dict(obj["tokenUsage"]) if obj.get("tokenUsage") is not None else None,
             "cost": RunCost.from_dict(obj["cost"]) if obj.get("cost") is not None else None

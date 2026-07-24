@@ -38,6 +38,8 @@ __all__ = [
     "CreateWorkflowRun",
     "CreateWorkflowRunMetadataValue",
     "CreateWorkflowRunResponse",
+    "Emit",
+    "EmittedItem",
     "ErrorResponse",
     "HttpCall",
     "HttpHeader",
@@ -104,6 +106,8 @@ from promptjuggler._generated.models.create_prompt_run_response import CreatePro
 from promptjuggler._generated.models.create_workflow_run import CreateWorkflowRun as CreateWorkflowRun
 from promptjuggler._generated.models.create_workflow_run_metadata_value import CreateWorkflowRunMetadataValue as CreateWorkflowRunMetadataValue
 from promptjuggler._generated.models.create_workflow_run_response import CreateWorkflowRunResponse as CreateWorkflowRunResponse
+from promptjuggler._generated.models.emit import Emit as Emit
+from promptjuggler._generated.models.emitted_item import EmittedItem as EmittedItem
 from promptjuggler._generated.models.error_response import ErrorResponse as ErrorResponse
 from promptjuggler._generated.models.http_call import HttpCall as HttpCall
 from promptjuggler._generated.models.http_header import HttpHeader as HttpHeader
