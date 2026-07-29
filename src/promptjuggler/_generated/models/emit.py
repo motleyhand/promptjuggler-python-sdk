@@ -29,12 +29,11 @@ class Emit(BaseModel):
     Emit a schema-validated payload: the arguments are the result.
     """ # noqa: E501
     params_schema: StrictStr = Field(description="JSON schema of the payload this tool emits.", alias="paramsSchema")
-    inline: StrictBool = Field(description="Whether to also splice the payload into the output text as an emit:<name> markdown fence at the call position.")
     name: Annotated[str, Field(strict=True)] = Field(description="The tool’s name.")
     description: Optional[StrictStr] = Field(default=None, description="The tool’s description.")
     fail_fast: Optional[StrictBool] = Field(default=False, description="Whether to stop processing if a tool call fails.", alias="failFast")
     type: StrictStr
-    __properties: ClassVar[List[str]] = ["paramsSchema", "inline", "name", "description", "failFast", "type"]
+    __properties: ClassVar[List[str]] = ["paramsSchema", "name", "description", "failFast", "type"]
 
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
@@ -110,7 +109,6 @@ class Emit(BaseModel):
 
         _obj = cls.model_validate({
             "paramsSchema": obj.get("paramsSchema"),
-            "inline": obj.get("inline"),
             "name": obj.get("name"),
             "description": obj.get("description"),
             "failFast": obj.get("failFast") if obj.get("failFast") is not None else False,
