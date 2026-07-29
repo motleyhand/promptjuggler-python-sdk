@@ -13,6 +13,7 @@
 """  # noqa: E501
 
 # import models into model package
+from promptjuggler._generated.models.citation import Citation
 from promptjuggler._generated.models.content_message_response import ContentMessageResponse
 from promptjuggler._generated.models.create_prompt_run import CreatePromptRun
 from promptjuggler._generated.models.create_prompt_run_response import CreatePromptRunResponse
@@ -54,6 +55,11 @@ from promptjuggler._generated.models.stream_token_response import StreamTokenRes
 from promptjuggler._generated.models.text_format import TextFormat
 from promptjuggler._generated.models.token_usage import TokenUsage
 from promptjuggler._generated.models.tool import Tool
+from promptjuggler._generated.models.tool_status import ToolStatus
+from promptjuggler._generated.models.transcript_data import TranscriptData
+from promptjuggler._generated.models.transcript_item import TranscriptItem
+from promptjuggler._generated.models.transcript_text import TranscriptText
+from promptjuggler._generated.models.transcript_tool import TranscriptTool
 from promptjuggler._generated.models.version_ref import VersionRef
 from promptjuggler._generated.models.version_ref_id_or_tag import VersionRefIdOrTag
 from promptjuggler._generated.models.web_search import WebSearch

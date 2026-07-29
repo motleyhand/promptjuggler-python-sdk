@@ -32,6 +32,7 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "Citation",
     "ContentMessageResponse",
     "CreatePromptRun",
     "CreatePromptRunResponse",
@@ -73,6 +74,11 @@ __all__ = [
     "TextFormat",
     "TokenUsage",
     "Tool",
+    "ToolStatus",
+    "TranscriptData",
+    "TranscriptItem",
+    "TranscriptText",
+    "TranscriptTool",
     "VersionRef",
     "VersionRefIdOrTag",
     "WebSearch",
@@ -100,6 +106,7 @@ from promptjuggler._generated.exceptions import ApiAttributeError as ApiAttribut
 from promptjuggler._generated.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from promptjuggler._generated.models.citation import Citation as Citation
 from promptjuggler._generated.models.content_message_response import ContentMessageResponse as ContentMessageResponse
 from promptjuggler._generated.models.create_prompt_run import CreatePromptRun as CreatePromptRun
 from promptjuggler._generated.models.create_prompt_run_response import CreatePromptRunResponse as CreatePromptRunResponse
@@ -141,6 +148,11 @@ from promptjuggler._generated.models.stream_token_response import StreamTokenRes
 from promptjuggler._generated.models.text_format import TextFormat as TextFormat
 from promptjuggler._generated.models.token_usage import TokenUsage as TokenUsage
 from promptjuggler._generated.models.tool import Tool as Tool
+from promptjuggler._generated.models.tool_status import ToolStatus as ToolStatus
+from promptjuggler._generated.models.transcript_data import TranscriptData as TranscriptData
+from promptjuggler._generated.models.transcript_item import TranscriptItem as TranscriptItem
+from promptjuggler._generated.models.transcript_text import TranscriptText as TranscriptText
+from promptjuggler._generated.models.transcript_tool import TranscriptTool as TranscriptTool
 from promptjuggler._generated.models.version_ref import VersionRef as VersionRef
 from promptjuggler._generated.models.version_ref_id_or_tag import VersionRefIdOrTag as VersionRefIdOrTag
 from promptjuggler._generated.models.web_search import WebSearch as WebSearch
