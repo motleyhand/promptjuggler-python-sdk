@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from uuid import UUID
 from promptjuggler._generated.models.version_ref_id_or_tag import VersionRefIdOrTag
 from typing import Optional, Set
@@ -30,9 +30,8 @@ class VersionRef(BaseModel):
     A reference to a revision.
     """ # noqa: E501
     definition_id: UUID = Field(description="Definition – prompt or workflow – ID.", alias="definitionId")
-    parent_id: Optional[UUID] = Field(default=None, description="Deprecated alias of definitionId.", alias="parentId")
     id_or_tag: VersionRefIdOrTag = Field(alias="idOrTag")
-    __properties: ClassVar[List[str]] = ["definitionId", "parentId", "idOrTag"]
+    __properties: ClassVar[List[str]] = ["definitionId", "idOrTag"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -76,11 +75,6 @@ class VersionRef(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of id_or_tag
         if self.id_or_tag:
             _dict['idOrTag'] = self.id_or_tag.to_dict()
-        # set to None if parent_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.parent_id is None and "parent_id" in self.model_fields_set:
-            _dict['parentId'] = None
-
         return _dict
 
     @classmethod
@@ -94,7 +88,6 @@ class VersionRef(BaseModel):
 
         _obj = cls.model_validate({
             "definitionId": obj.get("definitionId"),
-            "parentId": obj.get("parentId"),
             "idOrTag": VersionRefIdOrTag.from_dict(obj["idOrTag"]) if obj.get("idOrTag") is not None else None
         })
         return _obj
