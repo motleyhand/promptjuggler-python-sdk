@@ -29,10 +29,10 @@ class VersionRef(BaseModel):
     """
     A reference to a revision.
     """ # noqa: E501
+    definition_id: UUID = Field(description="Definition – prompt or workflow – ID.", alias="definitionId")
     parent_id: Optional[UUID] = Field(default=None, description="Deprecated alias of definitionId.", alias="parentId")
     id_or_tag: VersionRefIdOrTag = Field(alias="idOrTag")
-    definition_id: UUID = Field(description="Definition – prompt or workflow – ID.", alias="definitionId")
-    __properties: ClassVar[List[str]] = ["parentId", "idOrTag", "definitionId"]
+    __properties: ClassVar[List[str]] = ["definitionId", "parentId", "idOrTag"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -93,9 +93,9 @@ class VersionRef(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "definitionId": obj.get("definitionId"),
             "parentId": obj.get("parentId"),
-            "idOrTag": VersionRefIdOrTag.from_dict(obj["idOrTag"]) if obj.get("idOrTag") is not None else None,
-            "definitionId": obj.get("definitionId")
+            "idOrTag": VersionRefIdOrTag.from_dict(obj["idOrTag"]) if obj.get("idOrTag") is not None else None
         })
         return _obj
 
