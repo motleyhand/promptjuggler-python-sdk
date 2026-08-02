@@ -35,7 +35,7 @@ class HttpCall(BaseModel):
     headers: Optional[List[HttpHeader]] = Field(default=None, description="The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders.")
     name: Annotated[str, Field(strict=True)] = Field(description="The tool’s name.")
     description: Optional[StrictStr] = Field(default=None, description="The tool’s description.")
-    fail_fast: Optional[StrictBool] = Field(default=False, description="Whether to stop processing if a tool call fails.", alias="failFast")
+    fail_fast: StrictBool = Field(description="Whether to stop processing if a tool call fails.", alias="failFast")
     type: StrictStr
     __properties: ClassVar[List[str]] = ["paramsSchema", "url", "method", "headers", "name", "description", "failFast", "type"]
 
@@ -132,7 +132,7 @@ class HttpCall(BaseModel):
             "headers": [HttpHeader.from_dict(_item) for _item in obj["headers"]] if obj.get("headers") is not None else None,
             "name": obj.get("name"),
             "description": obj.get("description"),
-            "failFast": obj.get("failFast") if obj.get("failFast") is not None else False,
+            "failFast": obj.get("failFast"),
             "type": obj.get("type")
         })
         return _obj

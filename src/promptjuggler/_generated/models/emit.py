@@ -31,7 +31,7 @@ class Emit(BaseModel):
     params_schema: StrictStr = Field(description="JSON schema of the payload this tool emits.", alias="paramsSchema")
     name: Annotated[str, Field(strict=True)] = Field(description="The tool’s name.")
     description: Optional[StrictStr] = Field(default=None, description="The tool’s description.")
-    fail_fast: Optional[StrictBool] = Field(default=False, description="Whether to stop processing if a tool call fails.", alias="failFast")
+    fail_fast: StrictBool = Field(description="Whether to stop processing if a tool call fails.", alias="failFast")
     type: StrictStr
     __properties: ClassVar[List[str]] = ["paramsSchema", "name", "description", "failFast", "type"]
 
@@ -111,7 +111,7 @@ class Emit(BaseModel):
             "paramsSchema": obj.get("paramsSchema"),
             "name": obj.get("name"),
             "description": obj.get("description"),
-            "failFast": obj.get("failFast") if obj.get("failFast") is not None else False,
+            "failFast": obj.get("failFast"),
             "type": obj.get("type")
         })
         return _obj

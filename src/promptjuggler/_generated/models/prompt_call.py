@@ -32,7 +32,7 @@ class PromptCall(BaseModel):
     version_ref: VersionRef = Field(description="Referencing the prompt revision either by id or version number or tag.", alias="versionRef")
     name: Annotated[str, Field(strict=True)] = Field(description="The tool’s name.")
     description: Optional[StrictStr] = Field(default=None, description="The tool’s description.")
-    fail_fast: Optional[StrictBool] = Field(default=False, description="Whether to stop processing if a tool call fails.", alias="failFast")
+    fail_fast: StrictBool = Field(description="Whether to stop processing if a tool call fails.", alias="failFast")
     type: StrictStr
     __properties: ClassVar[List[str]] = ["versionRef", "name", "description", "failFast", "type"]
 
@@ -115,7 +115,7 @@ class PromptCall(BaseModel):
             "versionRef": VersionRef.from_dict(obj["versionRef"]) if obj.get("versionRef") is not None else None,
             "name": obj.get("name"),
             "description": obj.get("description"),
-            "failFast": obj.get("failFast") if obj.get("failFast") is not None else False,
+            "failFast": obj.get("failFast"),
             "type": obj.get("type")
         })
         return _obj
