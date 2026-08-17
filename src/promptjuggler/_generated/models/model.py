@@ -43,6 +43,7 @@ class Model(str, Enum):
     GPT_MINUS_4O = 'gpt-4o'
     GPT_MINUS_4O_MINUS_MINI = 'gpt-4o-mini'
     GEMINI_MINUS_3_DOT_1_MINUS_PRO_MINUS_PREVIEW = 'gemini-3.1-pro-preview'
+    GEMINI_MINUS_3_DOT_7_MINUS_FLASH = 'gemini-3.7-flash'
     GEMINI_MINUS_3_DOT_6_MINUS_FLASH = 'gemini-3.6-flash'
     GEMINI_MINUS_3_DOT_5_MINUS_FLASH = 'gemini-3.5-flash'
     GEMINI_MINUS_3_MINUS_FLASH_MINUS_PREVIEW = 'gemini-3-flash-preview'
