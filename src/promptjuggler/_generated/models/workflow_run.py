@@ -39,7 +39,7 @@ class WorkflowRun(BaseModel):
     outputs: Dict[str, Optional[StrictStr]] = Field(description="Map of output node names to their values. Empty object while pending.")
     errors: List[StrictStr] = Field(description="List of error messages from failed nodes. Empty array on success.")
     token_usage: Optional[TokenUsage] = Field(default=None, description="Aggregated token usage across the workflow run. Null while pending.", alias="tokenUsage")
-    cost: Optional[RunCost] = Field(default=None, description="Aggregated cost breakdown across the workflow run. Null while pending.")
+    cost: Optional[RunCost] = Field(default=None, description="Aggregated cost breakdown across the workflow run. Null while pending, or when no published rate covers one of its runs.")
     __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "outputs", "errors", "tokenUsage", "cost"]
 
     model_config = ConfigDict(

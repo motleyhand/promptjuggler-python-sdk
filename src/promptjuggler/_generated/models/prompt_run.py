@@ -43,7 +43,7 @@ class PromptRun(BaseModel):
     transcript: List[TranscriptItem] = Field(description="The run as a renderable sequence: assistant text, the tools it used, and emit payloads in position. Empty until the run completes. `output` remains the flat text for callers that only need the answer.")
     error: Optional[StrictStr] = Field(default=None, description="Error message if the run failed. Null on success.")
     token_usage: Optional[TokenUsage] = Field(default=None, description="Token usage for the successful run. Null while pending or when the run failed.", alias="tokenUsage")
-    cost: Optional[RunCost] = Field(default=None, description="Cost breakdown for the run. Null while pending.")
+    cost: Optional[RunCost] = Field(default=None, description="Cost breakdown for the run. Null while pending, or when no published rate covers the run.")
     __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "output", "emitted", "transcript", "error", "tokenUsage", "cost"]
 
     model_config = ConfigDict(
