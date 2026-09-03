@@ -38,11 +38,11 @@ class PromptRun(BaseModel):
     status: RunStatus = Field(description="Current run status.")
     created_at: datetime = Field(description="Timestamp when the run was created.", alias="createdAt")
     finished_at: Optional[datetime] = Field(default=None, description="Timestamp when the run finished. Null while the run is pending.", alias="finishedAt")
-    output: Optional[StrictStr] = Field(default=None, description="LLM output text. Null while pending or when the run failed.")
+    output: Optional[StrictStr] = Field(default=None, description="LLM output text produced so far; read `status` for completeness. Null when the run failed, or when the model returned no text — e.g. a turn that was only tool calls or only reasoning.")
     emitted: List[EmittedItem] = Field(description="Payloads produced by emit tools during this run, in call order. Empty until the run completes.")
     transcript: List[TranscriptItem] = Field(description="The run as a renderable sequence: assistant text, the tools it used, and emit payloads in position. Empty until the run completes. `output` remains the flat text for callers that only need the answer.")
-    error: Optional[StrictStr] = Field(default=None, description="Error message if the run failed. Null on success.")
-    token_usage: Optional[TokenUsage] = Field(default=None, description="Token usage for the successful run. Null while pending or when the run failed.", alias="tokenUsage")
+    error: Optional[StrictStr] = Field(default=None, description="Error message from the latest failed attempt, kept even once a retry recovers — so a pending or completed run can carry one. Read `status` for the outcome.")
+    token_usage: Optional[TokenUsage] = Field(default=None, description="Token usage accumulated over successful turns — a run that failed later still reports the earlier ones. Null until the first turn succeeds.", alias="tokenUsage")
     cost: Optional[RunCost] = Field(default=None, description="Cost breakdown for the run. Null while pending, or when no published rate covers the run.")
     __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "output", "emitted", "transcript", "error", "tokenUsage", "cost"]
 

@@ -36,8 +36,8 @@ class WorkflowRun(BaseModel):
     status: RunStatus = Field(description="Current run status.")
     created_at: datetime = Field(description="Timestamp when the run was created.", alias="createdAt")
     finished_at: Optional[datetime] = Field(default=None, description="Timestamp when the run finished. Null while the run is pending.", alias="finishedAt")
-    outputs: Dict[str, Optional[StrictStr]] = Field(description="Map of output node names to their values. Empty object while pending.")
-    errors: List[StrictStr] = Field(description="List of error messages from failed nodes. Empty array on success.")
+    outputs: Dict[str, Optional[StrictStr]] = Field(description="Map of output node names to their values. Only completed output nodes appear, so a pending or failed run can return a partial map — read `status` for completeness.")
+    errors: List[StrictStr] = Field(description="Node run messages: failures, warnings from nodes that completed anyway (e.g. a non-fail-fast assertion), and the latest error of a node still retrying. Non-empty does not mean the run failed — read `status`.")
     token_usage: Optional[TokenUsage] = Field(default=None, description="Aggregated token usage across the workflow run. Null while pending.", alias="tokenUsage")
     cost: Optional[RunCost] = Field(default=None, description="Aggregated cost breakdown across the workflow run. Null while pending, or when no published rate covers one of its runs.")
     __properties: ClassVar[List[str]] = ["id", "status", "createdAt", "finishedAt", "outputs", "errors", "tokenUsage", "cost"]
