@@ -26,6 +26,7 @@ class Model(str, Enum):
     """
     allowed enum values
     """
+    GPT_MINUS_6_MINUS_ASTRA = 'gpt-6-astra'
     GPT_MINUS_5_DOT_6_MINUS_SOL = 'gpt-5.6-sol'
     GPT_MINUS_5_DOT_6_MINUS_TERRA = 'gpt-5.6-terra'
     GPT_MINUS_5_DOT_6_MINUS_LUNA = 'gpt-5.6-luna'
@@ -43,6 +44,7 @@ class Model(str, Enum):
     GPT_MINUS_4O = 'gpt-4o'
     GPT_MINUS_4O_MINUS_MINI = 'gpt-4o-mini'
     GEMINI_MINUS_3_DOT_1_MINUS_PRO_MINUS_PREVIEW = 'gemini-3.1-pro-preview'
+    GEMINI_MINUS_3_DOT_8_MINUS_FLASH = 'gemini-3.8-flash'
     GEMINI_MINUS_3_DOT_7_MINUS_FLASH = 'gemini-3.7-flash'
     GEMINI_MINUS_3_DOT_6_MINUS_FLASH = 'gemini-3.6-flash'
     GEMINI_MINUS_3_DOT_5_MINUS_FLASH = 'gemini-3.5-flash'
@@ -52,6 +54,7 @@ class Model(str, Enum):
     GEMINI_MINUS_2_DOT_5_MINUS_PRO = 'gemini-2.5-pro'
     GEMINI_MINUS_2_DOT_5_MINUS_FLASH = 'gemini-2.5-flash'
     GEMINI_MINUS_2_DOT_5_MINUS_FLASH_MINUS_LITE = 'gemini-2.5-flash-lite'
+    CLAUDE_MINUS_FABLE_MINUS_5_MINUS_1 = 'claude-fable-5-1'
     CLAUDE_MINUS_FABLE_MINUS_5 = 'claude-fable-5'
     CLAUDE_MINUS_OPUS_MINUS_5 = 'claude-opus-5'
     CLAUDE_MINUS_OPUS_MINUS_4_MINUS_8 = 'claude-opus-4-8'
