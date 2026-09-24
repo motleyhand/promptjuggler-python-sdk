@@ -15,3 +15,8 @@ class ApiError(PromptJugglerError):
 
 class NetworkError(PromptJugglerError):
     """Raised when the request never reached the API (DNS failure, timeout, offline)."""
+
+
+class DecodeError(PromptJugglerError):
+    """Raised when the API replied with a success status but the body didn't decode into the expected
+    model. The request succeeded, so retrying a run starts a second one."""

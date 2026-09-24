@@ -13,6 +13,7 @@ from promptjuggler._generated.api.prompts_api import PromptsApi
 from promptjuggler._generated.api.streaming_api import StreamingApi
 from promptjuggler._generated.api.workflow_runs_api import WorkflowRunsApi
 from promptjuggler._generated.api_client import ApiClient
+from promptjuggler._generated.api_response import ApiResponse
 from promptjuggler._generated.configuration import Configuration
 from promptjuggler._generated.exceptions import ApiException
 from promptjuggler._generated.models.create_prompt_run import CreatePromptRun
@@ -26,7 +27,8 @@ from promptjuggler._generated.models.prompt_revision import PromptRevision
 from promptjuggler._generated.models.prompt_run import PromptRun
 from promptjuggler._generated.models.stream_token_response import StreamTokenResponse
 from promptjuggler._generated.models.workflow_run import WorkflowRun
-from promptjuggler.errors import ApiError, NetworkError
+from promptjuggler._generated.rest import RESTResponse
+from promptjuggler.errors import ApiError, DecodeError, NetworkError
 
 DEFAULT_BASE_URL = "https://promptjuggler.com"
 
@@ -45,7 +47,7 @@ class PromptJuggler:
 
     def __init__(self, api_key: str, *, base_url: str | None = None) -> None:
         config = Configuration(host=base_url or DEFAULT_BASE_URL, access_token=api_key)
-        client = ApiClient(config)
+        client = _DecodingApiClient(config)
         self._prompts = PromptsApi(client)
         self._prompt_runs = PromptRunsApi(client)
         self._workflow_runs = WorkflowRunsApi(client)
@@ -173,6 +175,20 @@ class PromptJuggler:
         except urllib3.exceptions.HTTPError as error:
             # No response: DNS failure, timeout, refused connection, etc.
             raise NetworkError(str(error)) from error
+
+
+class _DecodingApiClient(ApiClient):
+    def response_deserialize(
+        self, response_data: RESTResponse, response_types_map: dict[str, Any] | None = None
+    ) -> ApiResponse[Any]:
+        try:
+            return super().response_deserialize(response_data, response_types_map)
+        except Exception as error:
+            # An error status always raises ApiException; on a 2xx, anything raised is the body
+            # failing to decode (bad JSON, a shape or oneOf variant the models don't know).
+            if not 200 <= response_data.status <= 299:
+                raise
+            raise DecodeError(str(error)) from error
 
 
 def _uuid(value: str | UUID) -> UUID:

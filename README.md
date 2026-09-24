@@ -30,8 +30,9 @@ if run.status == RunStatus.COMPLETED:
     print(run.output)
 ```
 
-Errors surface as `ApiError` (with a `status_code`). Verify incoming webhooks with
-`verify_webhook_signature()`.
+Errors surface as `ApiError` (with a `status_code`), `NetworkError` (no response), or
+`DecodeError` (an undecodable success body), all subclasses of `PromptJugglerError`. Verify
+incoming webhooks with `verify_webhook_signature()`.
 
 ## Documentation
 

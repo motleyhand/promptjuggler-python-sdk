@@ -10,12 +10,13 @@ from promptjuggler._generated.models.prompt_run import PromptRun
 from promptjuggler._generated.models.run_status import RunStatus
 from promptjuggler._generated.models.stream_token_response import StreamTokenResponse
 from promptjuggler._generated.models.workflow_run import WorkflowRun
-from promptjuggler.errors import ApiError, NetworkError, PromptJugglerError
+from promptjuggler.errors import ApiError, DecodeError, NetworkError, PromptJugglerError
 from promptjuggler.webhook import verify_webhook_signature
 
 __all__ = [
     "PromptJuggler",
     "ApiError",
+    "DecodeError",
     "NetworkError",
     "PromptJugglerError",
     "verify_webhook_signature",
