@@ -29,10 +29,11 @@ class ModelCost(BaseModel):
     """ # noqa: E501
     input: Union[StrictFloat, StrictInt]
     cached_input: Union[StrictFloat, StrictInt] = Field(alias="cachedInput")
+    cache_write: Union[StrictFloat, StrictInt] = Field(alias="cacheWrite")
     output: Union[StrictFloat, StrictInt]
     web_search: Union[StrictFloat, StrictInt] = Field(alias="webSearch")
     total: Union[StrictFloat, StrictInt]
-    __properties: ClassVar[List[str]] = ["input", "cachedInput", "output", "webSearch", "total"]
+    __properties: ClassVar[List[str]] = ["input", "cachedInput", "cacheWrite", "output", "webSearch", "total"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +88,7 @@ class ModelCost(BaseModel):
         _obj = cls.model_validate({
             "input": obj.get("input"),
             "cachedInput": obj.get("cachedInput"),
+            "cacheWrite": obj.get("cacheWrite"),
             "output": obj.get("output"),
             "webSearch": obj.get("webSearch"),
             "total": obj.get("total")

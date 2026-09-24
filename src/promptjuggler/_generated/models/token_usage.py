@@ -34,7 +34,8 @@ class TokenUsage(BaseModel):
     reasoning: StrictInt
     total: StrictInt
     service_tier: Optional[ServiceTier] = Field(default=None, alias="serviceTier")
-    __properties: ClassVar[List[str]] = ["input", "inputCached", "output", "reasoning", "total", "serviceTier"]
+    input_cache_write: Optional[StrictInt] = Field(default=0, alias="inputCacheWrite")
+    __properties: ClassVar[List[str]] = ["input", "inputCached", "output", "reasoning", "total", "serviceTier", "inputCacheWrite"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -92,7 +93,8 @@ class TokenUsage(BaseModel):
             "output": obj.get("output"),
             "reasoning": obj.get("reasoning"),
             "total": obj.get("total"),
-            "serviceTier": obj.get("serviceTier")
+            "serviceTier": obj.get("serviceTier"),
+            "inputCacheWrite": obj.get("inputCacheWrite") if obj.get("inputCacheWrite") is not None else 0
         })
         return _obj
 
