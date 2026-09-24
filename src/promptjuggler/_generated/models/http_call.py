@@ -32,7 +32,7 @@ class HttpCall(BaseModel):
     params_schema: StrictStr = Field(description="JSON schema of the parameters this tool expects.", alias="paramsSchema")
     url: StrictStr = Field(description="The URL to call. Can contain ${ENV_VAR} and {{inputName}} placeholders.")
     method: StrictStr
-    headers: Optional[List[HttpHeader]] = Field(default=None, description="The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders.")
+    headers: Optional[List[HttpHeader]] = Field(default=None, description="The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders; a credential header (Authorization, *-Key, *-Token, …) must take its secret from one.")
     name: Annotated[str, Field(strict=True)] = Field(description="The tool’s name.")
     description: Optional[StrictStr] = Field(default=None, description="The tool’s description.")
     fail_fast: StrictBool = Field(description="Whether to stop processing if a tool call fails.", alias="failFast")
