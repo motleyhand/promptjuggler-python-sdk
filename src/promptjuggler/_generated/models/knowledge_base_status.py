@@ -14,11 +14,11 @@
 
 from __future__ import annotations
 import json
-from enum import Enum
+from promptjuggler._open_enum import OpenEnum
 from typing_extensions import Self
 
 
-class KnowledgeBaseStatus(str, Enum):
+class KnowledgeBaseStatus(OpenEnum):
     """
     KnowledgeBaseStatus
     """

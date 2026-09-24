@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from promptjuggler._generated.models.service_tier import ServiceTier
@@ -37,26 +37,6 @@ class ModelParams(BaseModel):
     reasoning_summary: Optional[StrictBool] = Field(default=None, description="Return reasoning summary.", alias="reasoningSummary")
     service_tier: Optional[ServiceTier] = Field(default=None, description="Service tier.", alias="serviceTier")
     __properties: ClassVar[List[str]] = ["maxCompletionTokens", "temperature", "topP", "verbosity", "reasoningEffort", "reasoningSummary", "serviceTier"]
-
-    @field_validator('verbosity')
-    def verbosity_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['low', 'medium', 'high']):
-            raise ValueError("must be one of enum values ('low', 'medium', 'high')")
-        return value
-
-    @field_validator('reasoning_effort')
-    def reasoning_effort_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['none', 'low', 'medium', 'high', 'xhigh', 'max']):
-            raise ValueError("must be one of enum values ('none', 'low', 'medium', 'high', 'xhigh', 'max')")
-        return value
 
     model_config = ConfigDict(
         validate_by_name=True,

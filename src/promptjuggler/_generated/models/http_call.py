@@ -39,13 +39,6 @@ class HttpCall(BaseModel):
     type: StrictStr
     __properties: ClassVar[List[str]] = ["paramsSchema", "url", "method", "headers", "name", "description", "failFast", "type"]
 
-    @field_validator('method')
-    def method_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['GET', 'POST', 'PUT', 'PATCH', 'DELETE']):
-            raise ValueError("must be one of enum values ('GET', 'POST', 'PUT', 'PATCH', 'DELETE')")
-        return value
-
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""

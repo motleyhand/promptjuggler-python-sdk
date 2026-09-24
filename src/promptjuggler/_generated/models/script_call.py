@@ -36,13 +36,6 @@ class ScriptCall(BaseModel):
     type: StrictStr
     __properties: ClassVar[List[str]] = ["language", "code", "name", "description", "failFast", "type"]
 
-    @field_validator('language')
-    def language_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['python', 'javascript']):
-            raise ValueError("must be one of enum values ('python', 'javascript')")
-        return value
-
     @field_validator('name')
     def name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
