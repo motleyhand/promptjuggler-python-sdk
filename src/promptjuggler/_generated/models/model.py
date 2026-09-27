@@ -27,6 +27,8 @@ class Model(OpenEnum):
     allowed enum values
     """
     GPT_MINUS_6_MINUS_ASTRA = 'gpt-6-astra'
+    GPT_MINUS_6_MINUS_SOL = 'gpt-6-sol'
+    GPT_MINUS_6_MINUS_LUNA = 'gpt-6-luna'
     GPT_MINUS_5_DOT_6_MINUS_SOL = 'gpt-5.6-sol'
     GPT_MINUS_5_DOT_6_MINUS_TERRA = 'gpt-5.6-terra'
     GPT_MINUS_5_DOT_6_MINUS_LUNA = 'gpt-5.6-luna'
@@ -56,6 +58,7 @@ class Model(OpenEnum):
     GEMINI_MINUS_2_DOT_5_MINUS_FLASH_MINUS_LITE = 'gemini-2.5-flash-lite'
     CLAUDE_MINUS_FABLE_MINUS_5_MINUS_1 = 'claude-fable-5-1'
     CLAUDE_MINUS_FABLE_MINUS_5 = 'claude-fable-5'
+    CLAUDE_MINUS_OPUS_MINUS_5_MINUS_5 = 'claude-opus-5-5'
     CLAUDE_MINUS_OPUS_MINUS_5 = 'claude-opus-5'
     CLAUDE_MINUS_OPUS_MINUS_4_MINUS_8 = 'claude-opus-4-8'
     CLAUDE_MINUS_OPUS_MINUS_4_MINUS_7 = 'claude-opus-4-7'
