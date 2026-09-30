@@ -60,3 +60,28 @@ def test_get_prompt_decodes_fields_and_enum_values_newer_than_the_sdk() -> None:
     tool = prompt.tools[0].actual_instance
     assert isinstance(tool, HttpCall)
     assert tool.method == "QUERY"
+
+
+def test_dumping_a_revision_shows_one_of_fields_as_their_variant() -> None:
+    # The generator wraps every oneOf in a model of its own; pydantic's dump and repr must show the
+    # variant, not the wrapper's plumbing.
+    response_format = {"type": "json_schema", "name": "reply", "schema": "{}", "strict": True}
+    tool = {
+        "type": "prompt",
+        "versionRef": {"definitionId": "550e8400-e29b-41d4-a716-446655440012", "idOrTag": "production"},
+        "name": "summarize",
+        "failFast": True,
+    }
+    with mock_transport({**REVISION, "responseFormat": response_format, "tools": [tool]}):
+        prompt = client().get_prompt("greeting", "production")
+
+    dumped = prompt.model_dump(mode="json", by_alias=True, exclude_none=True)
+
+    assert dumped["responseFormat"] == response_format
+    assert dumped["tools"] == [tool]
+    included = prompt.model_dump(by_alias=True, include={"response_format": {"name"}, "tools": {0: {"type"}}})
+    assert included == {
+        "responseFormat": {"name": "reply"},
+        "tools": [{"type": "prompt"}],
+    }
+    assert repr(prompt.response_format).startswith("ResponseFormat(actual_instance=JsonSchemaFormat(")

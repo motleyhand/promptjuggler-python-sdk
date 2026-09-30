@@ -23,10 +23,11 @@ from promptjuggler._generated.models.transcript_tool import TranscriptTool
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
+from promptjuggler._one_of import OneOf
 
 TRANSCRIPTITEM_ONE_OF_SCHEMAS = ["TranscriptData", "TranscriptText", "TranscriptTool"]
 
-class TranscriptItem(BaseModel):
+class TranscriptItem(OneOf):
     """
     TranscriptItem
     """

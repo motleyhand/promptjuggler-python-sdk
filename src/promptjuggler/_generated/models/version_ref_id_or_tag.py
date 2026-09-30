@@ -20,10 +20,11 @@ from typing import Any, List, Optional
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
+from promptjuggler._one_of import OneOf
 
 VERSIONREFIDORTAG_ONE_OF_SCHEMAS = ["int", "str"]
 
-class VersionRefIdOrTag(BaseModel):
+class VersionRefIdOrTag(OneOf):
     """
     Revision ID or version number or tag.
     """

@@ -28,10 +28,11 @@ from promptjuggler._generated.models.workflow_call import WorkflowCall
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
+from promptjuggler._one_of import OneOf
 
 TOOL_ONE_OF_SCHEMAS = ["Emit", "HttpCall", "KnowledgeSearch", "Mcp", "PromptCall", "ScriptCall", "WebSearch", "WorkflowCall"]
 
-class Tool(BaseModel):
+class Tool(OneOf):
     """
     Tool
     """

@@ -23,10 +23,11 @@ from promptjuggler._generated.models.text_format import TextFormat
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
+from promptjuggler._one_of import OneOf
 
 RESPONSEFORMAT_ONE_OF_SCHEMAS = ["JsonObjectFormat", "JsonSchemaFormat", "TextFormat"]
 
-class ResponseFormat(BaseModel):
+class ResponseFormat(OneOf):
     """
     ResponseFormat
     """
