@@ -26,6 +26,7 @@ class Model(OpenEnum):
     """
     allowed enum values
     """
+    GPT_MINUS_6_DOT_1_MINUS_SOL = 'gpt-6.1-sol'
     GPT_MINUS_6_MINUS_ASTRA = 'gpt-6-astra'
     GPT_MINUS_6_MINUS_SOL = 'gpt-6-sol'
     GPT_MINUS_6_MINUS_LUNA = 'gpt-6-luna'
@@ -64,9 +65,9 @@ class Model(OpenEnum):
     CLAUDE_MINUS_OPUS_MINUS_4_MINUS_7 = 'claude-opus-4-7'
     CLAUDE_MINUS_OPUS_MINUS_4_MINUS_6 = 'claude-opus-4-6'
     CLAUDE_MINUS_OPUS_MINUS_4_MINUS_5 = 'claude-opus-4-5'
+    CLAUDE_MINUS_SONNET_MINUS_5_MINUS_5 = 'claude-sonnet-5-5'
     CLAUDE_MINUS_SONNET_MINUS_5 = 'claude-sonnet-5'
     CLAUDE_MINUS_SONNET_MINUS_4_MINUS_6 = 'claude-sonnet-4-6'
-    CLAUDE_MINUS_SONNET_MINUS_4_MINUS_5 = 'claude-sonnet-4-5'
     CLAUDE_MINUS_HAIKU_MINUS_4_MINUS_5 = 'claude-haiku-4-5'
 
     @classmethod
