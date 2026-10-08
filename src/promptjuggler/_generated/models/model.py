@@ -68,6 +68,7 @@ class Model(OpenEnum):
     CLAUDE_MINUS_SONNET_MINUS_5_MINUS_5 = 'claude-sonnet-5-5'
     CLAUDE_MINUS_SONNET_MINUS_5 = 'claude-sonnet-5'
     CLAUDE_MINUS_SONNET_MINUS_4_MINUS_6 = 'claude-sonnet-4-6'
+    CLAUDE_MINUS_HAIKU_MINUS_5_MINUS_5 = 'claude-haiku-5-5'
     CLAUDE_MINUS_HAIKU_MINUS_4_MINUS_5 = 'claude-haiku-4-5'
 
     @classmethod
