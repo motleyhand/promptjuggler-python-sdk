@@ -56,7 +56,6 @@ __all__ = [
     "KnowledgeSearch",
     "Mcp",
     "Memory",
-    "Model",
     "ModelCost",
     "ModelParams",
     "PromptCall",
@@ -130,7 +129,6 @@ from promptjuggler._generated.models.knowledge_document_summary import Knowledge
 from promptjuggler._generated.models.knowledge_search import KnowledgeSearch as KnowledgeSearch
 from promptjuggler._generated.models.mcp import Mcp as Mcp
 from promptjuggler._generated.models.memory import Memory as Memory
-from promptjuggler._generated.models.model import Model as Model
 from promptjuggler._generated.models.model_cost import ModelCost as ModelCost
 from promptjuggler._generated.models.model_params import ModelParams as ModelParams
 from promptjuggler._generated.models.prompt_call import PromptCall as PromptCall

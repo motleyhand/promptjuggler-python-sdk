@@ -37,7 +37,6 @@ from promptjuggler._generated.models.knowledge_document_summary import Knowledge
 from promptjuggler._generated.models.knowledge_search import KnowledgeSearch
 from promptjuggler._generated.models.mcp import Mcp
 from promptjuggler._generated.models.memory import Memory
-from promptjuggler._generated.models.model import Model
 from promptjuggler._generated.models.model_cost import ModelCost
 from promptjuggler._generated.models.model_params import ModelParams
 from promptjuggler._generated.models.prompt_call import PromptCall

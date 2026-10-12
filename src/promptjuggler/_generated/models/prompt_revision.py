@@ -22,7 +22,6 @@ from typing import Any, ClassVar, Dict, List, Optional
 from uuid import UUID
 from promptjuggler._generated.models.content_message_response import ContentMessageResponse
 from promptjuggler._generated.models.memory import Memory
-from promptjuggler._generated.models.model import Model
 from promptjuggler._generated.models.model_params import ModelParams
 from promptjuggler._generated.models.provider import Provider
 from promptjuggler._generated.models.response_format import ResponseFormat
@@ -39,7 +38,7 @@ class PromptRevision(BaseModel):
     prompt_id: UUID = Field(description="Prompt ID.", alias="promptId")
     memory: Memory = Field(description="Memory mode.")
     provider: Provider = Field(description="AI provider.")
-    model: Model = Field(description="AI model.")
+    model: StrictStr = Field(description="AI model.", json_schema_extra={"examples": ["claude-sonnet-5-5"]})
     model_params: ModelParams = Field(description="Model parameters.", alias="modelParams")
     response_format: ResponseFormat = Field(description="AI model response format.", alias="responseFormat")
     system_instruction: Optional[StrictStr] = Field(default=None, description="The system prompt.", alias="systemInstruction")

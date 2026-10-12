@@ -37,6 +37,7 @@ def test_get_prompt_decodes_fields_and_enum_values_newer_than_the_sdk() -> None:
     # decode a response carrying ones it doesn't know.
     revision = {
         **REVISION,
+        "provider": "mistral",
         "model": "gpt-9",
         "modelParams": {"reasoningEffort": "ultra"},
         "responseFormat": {"type": "text", "addedLater": 1},
@@ -55,7 +56,8 @@ def test_get_prompt_decodes_fields_and_enum_values_newer_than_the_sdk() -> None:
     with mock_transport(revision):
         prompt = client().get_prompt("greeting", "production")
 
-    assert prompt.model.value == "gpt-9"
+    assert prompt.provider.value == "mistral"
+    assert prompt.model == "gpt-9"
     assert prompt.model_params.reasoning_effort == "ultra"
     tool = prompt.tools[0].actual_instance
     assert isinstance(tool, HttpCall)
