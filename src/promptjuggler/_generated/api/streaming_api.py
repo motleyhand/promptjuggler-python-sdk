@@ -57,7 +57,7 @@ class StreamingApi:
     ) -> StreamTokenResponse:
         """Create a streaming credential for a thread
 
-        Returns a short-lived, thread-scoped token your frontend can use to subscribe to live token output over SSE. Call this from your backend with your API key, then hand the token to the browser — the API key itself must never leave your server. The thread does not have to exist yet: mint a token, connect, then start the run. Connect before triggering a run, since tokens emitted while nobody is subscribed are not replayed.
+        Returns a short-lived, thread-scoped token your frontend can use to subscribe to live token output over SSE. Call this from your backend with your API key, then hand the token to the browser — the API key itself must never leave your server. The thread does not have to exist yet: mint a token, connect, then start the run. A fresh connection starts at the live tip, so connect before triggering a run, or set the `replay` option of the browser SDK to join a run already under way.
 
         :param thread: Thread ID to subscribe to. Any UUID you intend to run against — the token is scoped to your tenant, so threads cannot collide across tenants. (required)
         :type thread: UUID
@@ -127,7 +127,7 @@ class StreamingApi:
     ) -> ApiResponse[StreamTokenResponse]:
         """Create a streaming credential for a thread
 
-        Returns a short-lived, thread-scoped token your frontend can use to subscribe to live token output over SSE. Call this from your backend with your API key, then hand the token to the browser — the API key itself must never leave your server. The thread does not have to exist yet: mint a token, connect, then start the run. Connect before triggering a run, since tokens emitted while nobody is subscribed are not replayed.
+        Returns a short-lived, thread-scoped token your frontend can use to subscribe to live token output over SSE. Call this from your backend with your API key, then hand the token to the browser — the API key itself must never leave your server. The thread does not have to exist yet: mint a token, connect, then start the run. A fresh connection starts at the live tip, so connect before triggering a run, or set the `replay` option of the browser SDK to join a run already under way.
 
         :param thread: Thread ID to subscribe to. Any UUID you intend to run against — the token is scoped to your tenant, so threads cannot collide across tenants. (required)
         :type thread: UUID
@@ -197,7 +197,7 @@ class StreamingApi:
     ) -> RESTResponseType:
         """Create a streaming credential for a thread
 
-        Returns a short-lived, thread-scoped token your frontend can use to subscribe to live token output over SSE. Call this from your backend with your API key, then hand the token to the browser — the API key itself must never leave your server. The thread does not have to exist yet: mint a token, connect, then start the run. Connect before triggering a run, since tokens emitted while nobody is subscribed are not replayed.
+        Returns a short-lived, thread-scoped token your frontend can use to subscribe to live token output over SSE. Call this from your backend with your API key, then hand the token to the browser — the API key itself must never leave your server. The thread does not have to exist yet: mint a token, connect, then start the run. A fresh connection starts at the live tip, so connect before triggering a run, or set the `replay` option of the browser SDK to join a run already under way.
 
         :param thread: Thread ID to subscribe to. Any UUID you intend to run against — the token is scoped to your tenant, so threads cannot collide across tenants. (required)
         :type thread: UUID
