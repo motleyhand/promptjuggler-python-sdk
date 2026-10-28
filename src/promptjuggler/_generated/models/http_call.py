@@ -30,7 +30,7 @@ class HttpCall(BaseModel):
     External HTTP call tool.
     """ # noqa: E501
     params_schema: StrictStr = Field(description="JSON schema of the parameters this tool expects.", alias="paramsSchema")
-    url: StrictStr = Field(description="The URL to call. Can contain ${ENV_VAR} and {{inputName}} placeholders.")
+    url: StrictStr = Field(description="The URL to call. Can contain ${ENV_VAR} and {{inputName}} placeholders; a password or a credential query parameter (api_key, token, …) must take its secret from one.")
     method: StrictStr
     headers: Optional[List[HttpHeader]] = Field(default=None, description="The headers to send with the HTTP request. Can contain ${ENV_VAR} and {{inputName}} placeholders; a credential header (Authorization, *-Key, *-Token, …) must take its secret from one.")
     name: Annotated[str, Field(strict=True)] = Field(description="The tool’s name.")

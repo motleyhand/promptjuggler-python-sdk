@@ -29,7 +29,7 @@ class Mcp(BaseModel):
     Built-in MCP server tool.
     """ # noqa: E501
     name: Annotated[str, Field(strict=True)] = Field(description="The MCP server tool’s name.")
-    url: StrictStr = Field(description="The URL of the MCP server.")
+    url: StrictStr = Field(description="The URL of the MCP server. A password or a credential query parameter (api_key, token, …) must take its secret from a placeholder.")
     authorization_token: Optional[StrictStr] = Field(default=None, description="Environment variable holding the MCP server’s authorization token, referenced as ${NAME}.", alias="authorizationToken")
     allowed_tools: Optional[List[StrictStr]] = Field(default=None, description="Tool names the model may call. Empty or omitted allows all of the server’s tools.", alias="allowedTools")
     type: StrictStr
