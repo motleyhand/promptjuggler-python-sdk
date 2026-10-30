@@ -34,7 +34,7 @@ class CreateWorkflowRun(BaseModel):
     priority: Optional[StrictStr] = Field(default='normal', description="Processing priority.")
     environment: Optional[StrictStr] = Field(default=None, description="Environment that scopes which webhooks fire and which environment variables the run can access. Uses the default environment when omitted.")
     env_vars: Optional[Dict[str, StrictStr]] = Field(default=None, description="Runtime environment variable overrides for this run. Keys must be UPPER_CASE. At most 50 entries, 64 KB total.", alias="envVars", json_schema_extra={"examples": [{"MY_API_KEY": "sk-..."}]})
-    metadata: Optional[Dict[str, CreateWorkflowRunMetadataValue]] = Field(default=None, description="Arbitrary key-value metadata attached to the run. Values can be strings or arrays of strings.", json_schema_extra={"examples": [{"user_id": "42"}]})
+    metadata: Optional[Dict[str, CreateWorkflowRunMetadataValue]] = Field(default=None, description="Arbitrary key-value metadata attached to the run. Values can be strings or arrays of strings. Each key can be up to 255 bytes, each value up to 1,024 bytes.", json_schema_extra={"examples": [{"user_id": "42"}]})
     __properties: ClassVar[List[str]] = ["inputs", "thread", "priority", "environment", "envVars", "metadata"]
 
     @field_validator('priority')
