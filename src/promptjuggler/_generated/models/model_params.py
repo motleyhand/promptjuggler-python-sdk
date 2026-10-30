@@ -31,7 +31,7 @@ class ModelParams(BaseModel):
     """ # noqa: E501
     max_completion_tokens: Optional[Annotated[int, Field(strict=True, ge=1)]] = Field(default=None, description="Maximum completion tokens.", alias="maxCompletionTokens")
     temperature: Optional[Union[Annotated[float, Field(le=2, strict=True, ge=0)], Annotated[int, Field(le=2, strict=True, ge=0)]]] = Field(default=None, description="Temperature.")
-    top_p: Optional[Union[Annotated[float, Field(le=2, strict=True, ge=0)], Annotated[int, Field(le=2, strict=True, ge=0)]]] = Field(default=None, description="Top P.", alias="topP")
+    top_p: Optional[Union[Annotated[float, Field(le=1, strict=True, ge=0)], Annotated[int, Field(le=1, strict=True, ge=0)]]] = Field(default=None, description="Top P.", alias="topP")
     verbosity: Optional[StrictStr] = Field(default=None, description="Verbosity.")
     reasoning_effort: Optional[StrictStr] = Field(default=None, description="Reasoning effort.", alias="reasoningEffort")
     reasoning_summary: Optional[StrictBool] = Field(default=None, description="Return reasoning summary.", alias="reasoningSummary")
