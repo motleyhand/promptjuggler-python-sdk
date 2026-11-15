@@ -41,7 +41,7 @@ class PromptsApi:
     def get_prompt_revision(
         self,
         slug: Annotated[StrictStr, Field(description="Prompt Handle")],
-        version: Annotated[StrictStr, Field(description="Specific version or tag or id")],
+        version: Annotated[StrictStr, Field(description="A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -61,7 +61,7 @@ class PromptsApi:
 
         :param slug: Prompt Handle (required)
         :type slug: str
-        :param version: Specific version or tag or id (required)
+        :param version: A version number such as `3` or `v3`, a tag, or `latest` for the newest published version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -114,7 +114,7 @@ class PromptsApi:
     def get_prompt_revision_with_http_info(
         self,
         slug: Annotated[StrictStr, Field(description="Prompt Handle")],
-        version: Annotated[StrictStr, Field(description="Specific version or tag or id")],
+        version: Annotated[StrictStr, Field(description="A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,7 +134,7 @@ class PromptsApi:
 
         :param slug: Prompt Handle (required)
         :type slug: str
-        :param version: Specific version or tag or id (required)
+        :param version: A version number such as `3` or `v3`, a tag, or `latest` for the newest published version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -187,7 +187,7 @@ class PromptsApi:
     def get_prompt_revision_without_preload_content(
         self,
         slug: Annotated[StrictStr, Field(description="Prompt Handle")],
-        version: Annotated[StrictStr, Field(description="Specific version or tag or id")],
+        version: Annotated[StrictStr, Field(description="A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -207,7 +207,7 @@ class PromptsApi:
 
         :param slug: Prompt Handle (required)
         :type slug: str
-        :param version: Specific version or tag or id (required)
+        :param version: A version number such as `3` or `v3`, a tag, or `latest` for the newest published version. (required)
         :type version: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

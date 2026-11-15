@@ -44,7 +44,7 @@ class PromptRunsApi:
     def create_prompt_run(
         self,
         slug: Annotated[StrictStr, Field(description="Prompt Handle")],
-        version: Annotated[StrictStr, Field(description="Specific version or tag or id")],
+        version: Annotated[StrictStr, Field(description="A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.")],
         create_prompt_run: CreatePromptRun,
         _request_timeout: Union[
             None,
@@ -65,7 +65,7 @@ class PromptRunsApi:
 
         :param slug: Prompt Handle (required)
         :type slug: str
-        :param version: Specific version or tag or id (required)
+        :param version: A version number such as `3` or `v3`, a tag, or `latest` for the newest published version. (required)
         :type version: str
         :param create_prompt_run: (required)
         :type create_prompt_run: CreatePromptRun
@@ -123,7 +123,7 @@ class PromptRunsApi:
     def create_prompt_run_with_http_info(
         self,
         slug: Annotated[StrictStr, Field(description="Prompt Handle")],
-        version: Annotated[StrictStr, Field(description="Specific version or tag or id")],
+        version: Annotated[StrictStr, Field(description="A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.")],
         create_prompt_run: CreatePromptRun,
         _request_timeout: Union[
             None,
@@ -144,7 +144,7 @@ class PromptRunsApi:
 
         :param slug: Prompt Handle (required)
         :type slug: str
-        :param version: Specific version or tag or id (required)
+        :param version: A version number such as `3` or `v3`, a tag, or `latest` for the newest published version. (required)
         :type version: str
         :param create_prompt_run: (required)
         :type create_prompt_run: CreatePromptRun
@@ -202,7 +202,7 @@ class PromptRunsApi:
     def create_prompt_run_without_preload_content(
         self,
         slug: Annotated[StrictStr, Field(description="Prompt Handle")],
-        version: Annotated[StrictStr, Field(description="Specific version or tag or id")],
+        version: Annotated[StrictStr, Field(description="A version number such as `3` or `v3`, a tag, or `latest` for the newest published version.")],
         create_prompt_run: CreatePromptRun,
         _request_timeout: Union[
             None,
@@ -223,7 +223,7 @@ class PromptRunsApi:
 
         :param slug: Prompt Handle (required)
         :type slug: str
-        :param version: Specific version or tag or id (required)
+        :param version: A version number such as `3` or `v3`, a tag, or `latest` for the newest published version. (required)
         :type version: str
         :param create_prompt_run: (required)
         :type create_prompt_run: CreatePromptRun
